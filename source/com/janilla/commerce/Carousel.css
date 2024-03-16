@@ -1,0 +1,28 @@
+.carousel {
+	padding: .25rem 0 1.5rem;
+	width: 100%;
+	
+	ul {
+		animation: marquee 60s linear infinite;
+		display: flex;
+		gap: 1rem;
+	}
+	
+	li {
+		background: black;
+		flex: none;
+		height: 30vh;
+		max-height: 275px;
+		max-width: 475px;
+		width: 33.333333%;
+	}
+}
+
+@keyframes marquee {
+	0% {
+		transform:translateX(0)
+	}
+	to {
+		transform:translateX(-100%)
+	}
+}

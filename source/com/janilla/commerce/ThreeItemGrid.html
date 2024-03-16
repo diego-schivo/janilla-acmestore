@@ -1,0 +1,22 @@
+<section class="three-item-grid">
+	<!--${products}-->
+</section>
+
+<template id="ThreeItemGrid-product">
+	<div>
+		<a href="/product/${handle}" class="product-tile">
+			<div class="picture-box hover-effect">
+				<img src="${featuredImage}" alt="${title}" />
+				<div class="product-tile-info">
+					<div>
+						<h3>${title}</h3>
+						<p class="price">
+							$${price}
+							<span>USD</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</template>

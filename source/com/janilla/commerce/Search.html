@@ -1,0 +1,66 @@
+<div class="search">
+	<div class="filter-list collections">
+		<nav>
+			<h3>Collections</h3>
+			<ul>
+				<!--${collections}-->
+			</ul>
+		</nav>
+	</div>
+	<div class="products">
+		<ul>
+			<!--${products}-->
+		</ul>
+	</div>
+	<div class="filter-list sortings">
+		<nav>
+			<h3>Sort by</h3>
+			<ul>
+				<!--${sortings}-->
+			</ul>
+		</nav>
+	</div>
+</div>
+
+<template id="Search-Collection">
+	<li>
+		<a href="/search/${handle}">${title}</a>
+	</li>
+</template>
+
+<template id="Search-Collection-active">
+	<li>
+		<p>${title}</p>
+	</li>
+</template>
+
+<template id="Search-Product">
+	<li>
+		<a href="/product/${handle}" class="product-tile">
+			<div class="picture-box hover-effect">
+				<img src="${featuredImage}" alt="${title}" />
+				<div class="product-tile-info">
+					<div>
+						<h3>${title}</h3>
+						<p class="price">
+							$${price}
+							<span>USD</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</a>
+	</li>
+</template>
+
+<template id="Search-Sorting">
+	<li>
+		<a href="<!--${uri}-->">${title}</a>
+	</li>
+</template>
+
+<template id="Search-Sorting-active">
+	<li>
+		<p>${title}</p>
+	</li>
+</template>

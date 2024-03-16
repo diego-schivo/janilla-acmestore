@@ -1,0 +1,97 @@
+<div class="product">
+	<div class="picture-box">
+		<div class="gallery-div">
+			<div>
+				<img src="${product.featuredImage}" alt="${product.title}" />
+				<div class="arrows-div">
+					<div>
+						<!--${arrows}-->
+					</div>
+				</div>
+			</div>
+			<ul>
+				<!--${product.images}-->
+			</ul>
+		</div>
+		<div class="product-description-div">
+			<div>
+				<h1>${product.title}</h1>
+				<div class="price">
+					<p>
+						$${product.price}
+						<span>USD</span>
+					</p>
+				</div>
+			</div>
+			<!--${product.options}-->
+			<div class="prose">
+				<!--${product.descriptionHtml}-->
+			</div>
+			<!--${addToCart}-->
+		</div>
+	</div>
+	<div>
+		<h2>Related Products</h2>
+		<ul>
+		</ul>
+	</div>
+</div>
+
+<template id="Product-Arrow">
+	<a href="<!--${href}-->" aria-label="${ariaLabel}">
+		<!--${icon}-->
+	</a>
+</template>
+
+<template id="Product-ArrowLeftIcon">
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+	</svg>
+</template>
+
+<template id="Product-ArrowRightIcon">
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+	</svg>
+</template>
+
+<template id="Product-Image">
+	<li class="${activeClass}">
+		<a href="<!--${href}-->" class="product-tile" aria-label="Enlarge product image">
+			<div class="picture-box hover-effect">
+				<img src="${src}" alt="" width="80" height="80">
+			</div>
+		</a>
+	</li>
+</template>
+
+<template id="Product-option">
+	<dl>
+		<dt>${name}</dt>
+		<dd>
+			<!--${values}-->
+		</dd>
+	</dl>
+</template>
+
+<template id="Product-OptionValue">
+	<button name="${name}" value="${value}" class="${activeClass}" title="${title}" data-${disabledAttribute} aria-disabled="${ariaDisabled}">${value}</button>
+</template>
+
+<template id="Product-AddToCart">
+	<form class="add-to-cart">
+		<button data-${disabledAttribute} aria-disabled="${ariaDisabled}" aria-label="${ariaLabel}">
+			<div>
+				<!--${icon}-->
+			</div>
+			Add To Cart
+		</button>
+		<input type="hidden" name="variant" value="${variant}" />
+	</form>
+</template>
+
+<template id="Product-PlusIcon">
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+	</svg>
+</template>

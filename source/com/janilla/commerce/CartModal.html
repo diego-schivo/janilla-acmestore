@@ -1,0 +1,117 @@
+<div class="cart-modal" style="display: none">
+	<div class="cart-overlay" aria-hidden="true"></div>
+	<div class="cart-panel ${emptyClass}">
+		<div>
+			<p>My Cart</p>
+			<button class="close" aria-label="Close cart">
+				<div class="icon-div">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+					</svg>
+				</div>
+			</button>
+		</div>
+		<!--${content}-->
+	</div>
+</div>
+
+<template id="CartModal-empty">
+	<div>
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path>
+		</svg>
+		<p>Your cart is empty.</p>
+	</div>
+</template>
+
+<template id="CartModal-nonempty">
+	<div>
+		<ul class="cart-lines">
+			<!--${items}-->
+		</ul>
+		<div class="cart-cost">
+			<div>
+				<p>Taxes</p>
+				<p class="amount">
+					$${cart.totalTaxAmount}
+					<span>USD</span>
+				</p>
+			</div>
+			<div>
+				<p>Shipping</p>
+				<p>Calculated at checkout</p>
+			</div>
+			<div>
+				<p>Total</p>
+				<p class="amount">
+					$${cart.totalAmount}
+					<span>USD</span>
+				</p>
+			</div>
+		</div>
+		<a href="#">Proceed to Checkout</a>
+	</div>
+</template>
+
+<template id="CartModal-item">
+	<li>
+		<div class="cart-line-div">
+			<div class="delete-div">
+				<form>
+					<input type="hidden" name="variant" value="${variant}" />
+					<button type="submit" aria-label="Remove cart item" aria-disabled="false">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+						</svg>
+					</button>
+					<p aria-live="polite" role="status"></p>
+				</form>
+			</div>
+			<a href="#">
+				<div class="picture-box">
+					<img src="${image}" />
+				</div>
+				<div>
+					<span>${title1}</span>
+					<p>${title2}</p>
+				</div>
+			</a>
+			<div>
+				<p>
+					$${totalAmount}
+					<span>USD</span>
+				</p>
+				<div class="quantity-div">
+					<!--${decrease}-->
+					<p>
+						<span>${quantity}</span>
+					</p>
+					<!--${increase}-->
+				</div>
+			</div>
+		</div>
+	</li>
+</template>
+
+<template id="CartModal-editItemQuantity">
+	<form>
+		<input type="hidden" name="variant" value="${variant}" />
+		<input type="hidden" name="quantity" value="${quantity}" />
+		<button type="submit" aria-label="${ariaLabel}" aria-disabled="${ariaDisabled}">
+			<!--${icon}-->
+		</button>
+		<p aria-live="polite" role="status"></p>
+	</form>
+</template>
+
+<template id="CartModal-minusIcon">
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15"></path>
+	</svg>
+</template>
+
+<template id="CartModal-plusIcon">
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+		<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
+	</svg>
+</template>
