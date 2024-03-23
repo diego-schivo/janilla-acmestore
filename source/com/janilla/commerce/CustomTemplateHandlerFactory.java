@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 import com.janilla.commerce.Navbar.MenuItem;
 import com.janilla.frontend.RenderEngine;
-import com.janilla.frontend.RenderEngine.ObjectAndType;
+import com.janilla.frontend.RenderEngine.Entry;
 import com.janilla.http.HttpExchange;
 import com.janilla.persistence.Persistence;
 import com.janilla.web.TemplateHandlerFactory;
@@ -45,19 +45,13 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 	}
 
 	@Override
-	protected void render(ObjectAndType input, HttpExchange exchange) throws IOException {
+	protected void render(Entry input, HttpExchange exchange) throws IOException {
 		var a = exchange.getRequest().getHeaders().get("Accept");
 		if (!a.equals("*/*")) {
-			var d = input.getValue();
+			var p = (Page) input.getValue();
 			var c = ((CommerceApp.Exchange) exchange).getCart(false);
 			CartModal m;
 			{
-//				var hh = exchange.getRequest().getHeaders();
-//				var h = hh != null ? hh.get("Cookie") : null;
-//				var cc = h != null ? Http.parseCookieHeader(h) : null;
-//				var s = cc != null ? cc.get("cart") : null;
-//				var i = s != null ? Long.parseLong(s) : 0;
-//				var c = i > 0 ? persistence.getCrud(Cart.class).read(i) : null;
 				var jj = c != null ? persistence.getCrud(CartItem.class).filter("cart", c.getId()) : null;
 				var ii = jj != null
 						? persistence.getCrud(CartItem.class).read(jj).collect(Collectors.toCollection(ArrayList::new))
@@ -69,8 +63,9 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 							new MenuItem("Shirts", URI.create("/search/shirts")),
 							new MenuItem("Stickers", URI.create("/search/stickers"))),
 					c != null ? c.getTotalQuantity() : 0);
-			var l = new Layout(n, d, m);
-			input = new ObjectAndType(null, l, null);
+			var f = new Footer();
+			var l = new Layout(n, p, f, m);
+			input = new Entry(null, l, null);
 		}
 		super.render(input, exchange);
 	}

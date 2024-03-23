@@ -31,6 +31,7 @@ import com.janilla.persistence.Index.KeywordSet;
 import com.janilla.persistence.Store;
 
 @Store
+@Index
 public class Product {
 
 	private long id;
@@ -57,6 +58,9 @@ public class Product {
 
 	@Index
 	private long[] collections;
+
+//	@Index
+	private boolean hidden;
 
 	public long getId() {
 		return id;
@@ -144,5 +148,13 @@ public class Product {
 
 	public void setCollections(long[] collections) {
 		this.collections = collections;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 }

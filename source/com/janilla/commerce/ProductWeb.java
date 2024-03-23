@@ -60,7 +60,12 @@ public class ProductWeb {
 
 	@Render(template = "Product.html")
 	public record Page(Product product, ProductVariant[] variants, int image, EntryList<String, String> parameters)
-			implements Renderer {
+			implements com.janilla.commerce.Page, Renderer {
+
+		@Override
+		public String description() {
+			return product.getDescription();
+		}
 
 		public Stream<@Render(delimiter = "<div></div>") Arrow> arrows() {
 			var q = parameters != null ? new EntryList<>(parameters) : new EntryList<String, String>();

@@ -40,13 +40,29 @@ public class HomeWeb {
 
 	@Handle(method = "GET", path = "/")
 	public Page getPage() throws IOException {
-		var c = persistence.getCrud(Collection.class).find("handle", "hidden-homepage-featured-items");
-		var ii = persistence.getCrud(Product.class).filter("collections", 0, 3, new Object[] { c }).ids();
-		var pp = persistence.getCrud(Product.class).read(ii).toList();
-		return new Page(List.of(new ThreeItemGrid(pp), new Carousel()));
+		ThreeItemGrid c1;
+		{
+			var c = persistence.getCrud(Collection.class).find("handle", "hidden-homepage-featured-items");
+			var ii = persistence.getCrud(Product.class).filter("collections", 0, 3, new Object[] { c }).ids();
+			var pp = persistence.getCrud(Product.class).read(ii).toList();
+			c1 = new ThreeItemGrid(pp);
+		}
+		Carousel c2;
+		{
+			var c = persistence.getCrud(Collection.class).find("handle", "hidden-homepage-carousel");
+			var ii = persistence.getCrud(Product.class).filter("collections", new Object[] { c });
+			var pp = persistence.getCrud(Product.class).read(ii).toList();
+			c2 = new Carousel(pp);
+		}
+		return new Page(List.of(c1, c2));
 	}
 
 	@Render(template = "Home.html")
-	public record Page(Iterable<Object> children) {
+	public record Page(Iterable<Object> children) implements com.janilla.commerce.Page {
+
+		@Override
+		public String description() {
+			return "Ecommerce store built with Janilla.";
+		}
 	}
 }

@@ -1,9 +1,8 @@
 @media (prefers-color-scheme: light) {
 	.navbar {
 		--cart-color: black;
-		--logo-background: white;
-		--logo-fill: black;
 		--menu-color: rgb(115, 115, 115);
+		--search-background: white;
 		--search-border: rgb(229, 231, 235);
 	}
 }
@@ -11,9 +10,8 @@
 @media (prefers-color-scheme: dark) {
 	.navbar {
 		--cart-color: white;
-		--logo-background: black;
-		--logo-fill: white;
 		--menu-color: rgb(163, 163, 163);
+		--search-background: transparent;
 		--search-border: rgb(38, 38, 38);
 	}
 }
@@ -45,6 +43,7 @@
 			margin-right: 1.5rem;
 
 			div:last-child {
+				font-weight: 500;
 				margin-left: .5rem;
 				text-transform: uppercase;
 			}
@@ -53,13 +52,13 @@
 
 	.icon-div {
 		&.logo {
-			background: var(--logo-background);
 			border-radius: .75rem;
 			height: 40px;
 			width: 40px;
 
 			svg {
-				fill: var(--logo-fill);
+				height: 16px;
+				width: 16px;
 			}
 		}
 	
@@ -114,17 +113,22 @@
 			}
 			
 			input {
+				background: var(--search-background);
 				border: 1px solid var(--search-border);
 				border-radius: .5rem;
 				padding: .5rem 1rem;
 			}
 	
 			div {
-				height: 30px;
+				height: 100%;
 				margin-right: .75rem;
 				position: absolute;
 				right: 0;
 				top: 0;
+			}
+			
+			svg {
+				height: 1rem;
 			}
 		}
 	}

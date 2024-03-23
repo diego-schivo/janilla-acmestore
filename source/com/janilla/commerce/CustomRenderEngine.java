@@ -35,7 +35,7 @@ public class CustomRenderEngine extends RenderEngine {
 	protected static Format currencyFormat = new DecimalFormat("0.00");
 
 	@Override
-	public Object render(ObjectAndType input) throws IOException {
+	public Object render(Entry input) throws IOException {
 		var o = super.render(input);
 		return o != null ? switch (o) {
 		case BigDecimal x -> currencyFormat.format(x);

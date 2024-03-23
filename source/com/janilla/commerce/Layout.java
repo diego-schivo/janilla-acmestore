@@ -26,5 +26,5 @@ package com.janilla.commerce;
 import com.janilla.web.Render;
 
 @Render(template = "Layout.html")
-public record Layout(Navbar navbar, Object content, CartModal cartModal) {
+public record Layout(Navbar navbar, Page page, Footer footer, CartModal cartModal) {
 }

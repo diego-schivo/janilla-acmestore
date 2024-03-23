@@ -23,8 +23,24 @@
  */
 package com.janilla.commerce;
 
+import com.janilla.frontend.RenderEngine;
+import com.janilla.frontend.Renderer;
 import com.janilla.web.Render;
 
 @Render(template = "Carousel.html")
-public record Carousel() {
+public record Carousel(Iterable<@Render(template = "Carousel-product.html") Product> products) implements Renderer {
+
+	@Override
+	public boolean evaluate(RenderEngine engine) {
+		record A(Product[] products) {
+		}
+		return engine.match(A.class, (x, y) -> {
+			var l = x.products.length;
+			var pp = new Product[l * 3];
+			System.arraycopy(x.products, 0, pp, 0, l);
+			System.arraycopy(x.products, 0, pp, l, l);
+			System.arraycopy(x.products, 0, pp, 2 * l, l);
+			y.setValue(pp);
+		});
+	}
 }

@@ -1,88 +1,24 @@
 <div class="carousel">
 	<ul>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/baby-onesie-beige-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/baby-cap-black.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/mug-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/hoodie-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/baby-onesie-beige-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/baby-cap-black.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/mug-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/hoodie-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/baby-onesie-beige-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/baby-cap-black.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/mug-1.avif" />
-				</div>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="product-tile">
-				<div>
-					<img src="/hoodie-1.avif" />
-				</div>
-			</a>
-		</li>
+		<!--${products}-->
 	</ul>
 </div>
+
+<template id="Carousel-product">
+	<li>
+		<a href="/product/${handle}" class="product-tile">
+			<div class="picture-box hover-effect">
+				<img src="${featuredImage}" alt="${title}" />
+				<div class="product-tile-info-div">
+					<div>
+						<h3>${title}</h3>
+						<p class="price">
+							$${price}
+							<span>USD</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</a>
+	</li>
+</template>

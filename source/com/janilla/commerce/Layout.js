@@ -53,8 +53,10 @@ class Layout {
 	handleUrlRequest = async e => {
 		const u = e.detail.url;
 		history.pushState({}, '', u);
+		const f = document.querySelector('main');
+		f.innerHTML = '';
 		const s = await fetch(u);
-		document.querySelector('main').innerHTML = await s.text();
+		f.innerHTML = await s.text();
 
 		const p = u instanceof URL ? u.pathname : u.toString();
 		if (p === '/')

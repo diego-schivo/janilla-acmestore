@@ -9,7 +9,7 @@
 	}
 	
 	li {
-		background: black;
+		/* background: black; */
 		flex: none;
 		height: 30vh;
 		max-height: 275px;

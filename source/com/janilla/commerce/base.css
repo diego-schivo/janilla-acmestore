@@ -8,9 +8,13 @@
 		--body-background: rgb(250, 250, 250);
 		--body-color: black;
 		--icon-border: rgb(229, 229, 229);
+		--logo-background: white;
+		--logo-fill: black;
 		--picture-box-background: white;
 		--picture-box-border: rgb(229, 229, 229);
 		--placeholder-color: rgb(115 115 115);
+		--product-tile-info-background: rgba(255, 255, 255, 0.7);
+		--product-tile-info-color: black;
 	}
 }
 
@@ -19,9 +23,13 @@
 		--body-background: rgb(23, 23, 23);
 		--body-color: white;
 		--icon-border: rgb(64, 64, 64);
+		--logo-background: black;
+		--logo-fill: white;
 		--picture-box-background: black;
 		--picture-box-border: rgb(38, 38, 38);
 		--placeholder-color: rgb(163 163 163);
+		--product-tile-info-background: rgba(0, 0, 0, 0.7);
+		--product-tile-info-color: white;
 	}
 }
 
@@ -38,8 +46,8 @@ body {
 	background: var(--body-background);
 }
 
-body,
-a {
+body {
+/* a { */
 	color: var(--body-color);
 }
 
@@ -70,6 +78,7 @@ h3 {
 
 a {
 	/* color: rgb(163, 163, 163); */
+	color: inherit;
 	text-decoration: none;
 	
 	&:hover {
@@ -143,7 +152,7 @@ svg {
 	}
 }
 
-.product-tile-info {
+.product-tile-info-div {
 	bottom: 0;
 	display: flex;
 	left: 0;
@@ -154,10 +163,11 @@ svg {
 	> div {
 		align-items: center;
 		backdrop-filter: blur(12px);
-		background: rgba(0, 0, 0, 0.7);
-		border: 1px solid rgb(38, 38, 38);
+		background: var(--product-tile-info-background);
+		/* border: 1px solid rgb(38, 38, 38); */
+		border: 1px solid rgb(229, 231, 235);
 		border-radius: 9999px;
-		color: white;
+		color: var(--product-tile-info-color);
 		display: flex;
 		font-size: .75rem;
 		font-weight: 600;
@@ -170,17 +180,10 @@ svg {
 	}
 }
 
-/*
-.box {
-	background: black;
-	border: 1px solid rgb(38, 38, 38);
-	border-radius: .5rem;
-}
-*/
-
 .price {
 	background: rgb(37, 99, 235);
 	border-radius: 9999px;
+	color: white;
 	/* line-height: 1.25rem; */
 	margin: 0 auto 0 0;
 	padding: .5rem;
@@ -227,6 +230,14 @@ svg {
 	height: 2.75rem;
 	justify-content: center;
 	width: 2.75rem;
+
+	&.logo {
+		background: var(--logo-background);
+
+		svg {
+			fill: var(--logo-fill);
+		}
+	}
 
 	svg {
 		height: 1.5rem;

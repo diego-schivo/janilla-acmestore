@@ -73,6 +73,7 @@ public class SearchWeb {
 			ii = c2.filter("title", (Object[]) Index.KeywordSet.space.split(query.toLowerCase()));
 		} else
 			ii = c2.list();
+//			ii = c2.filter("hidden", false);
 		if (sort == null || sort.isEmpty())
 			sort = "latest-desc";
 		var pp = c2.read(ii).sorted(switch (sort) {
@@ -105,7 +106,12 @@ public class SearchWeb {
 	@Render(template = "Search.html")
 	public record Page(Iterable<@Render(template = "Search-Collection.html") Collection> collections, long collection,
 			Iterable<@Render(template = "Search-Product.html") Product> products, Iterable<Sorting> sortings,
-			String sort) implements Renderer {
+			String sort) implements com.janilla.commerce.Page, Renderer {
+
+		@Override
+		public String description() {
+			return "Search for products in the store.";
+		}
 
 		@Override
 		public boolean evaluate(RenderEngine engine) {
