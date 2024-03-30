@@ -4,7 +4,7 @@
 	margin: 0 auto;
 	padding: 0 1rem;
 	
-	> div {
+	> div:first-child {
 		display: flex;
 		gap: 2rem;
 		padding: 3rem;
@@ -167,22 +167,7 @@
 	
 	.prose {
 		color: rgba(255, 255, 255, 0.6);
-		margin-bottom: 1.5rem;
-		
-		p {
-			margin-bottom: 1.25rem;
-		}
-		
-		ul {
-			list-style-type: disc;
-			margin: 2rem 0 0;
-			padding: 0 0 0 1.5rem;
-		}
-		
-		li {
-			margin: .5em 0;
-			padding: 0 0 0 .375em;
-		}
+		margin: 0 0 1.5rem;
 	}
 
 	.add-to-cart {
@@ -216,6 +201,30 @@
 	
 		svg {
 			height: 1.25rem;
+		}
+	}
+
+	> div:last-child {
+		padding: 2rem 0;
+		
+		h2 {
+			font-size: 1.5rem;
+			font-weight: 700;
+			margin: 0 0 1rem;
+		}
+		
+		ul {
+			column-gap: 1rem;
+			display: flex;
+			overflow-x: auto;
+			padding: .25rem 0 0;
+			width: 100%;
+		}
+		
+		li {
+			aspect-ratio: 1 / 1;
+			flex: 0 0 auto;
+			width: 20%;
 		}
 	}
 }

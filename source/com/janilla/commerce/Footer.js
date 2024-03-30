@@ -21,15 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.janilla.commerce;
+class Footer {
 
-import com.janilla.web.Render;
+	selector;
 
-@Render(template = "Layout.html")
-public record Layout(Navbar navbar, Page page, Footer footer, CartModal cartModal) {
-
-	public interface Page {
-
-		SEO getSEO();
+	listen = () => {
+		this.selector().querySelectorAll('li').forEach(x => {
+			if (x.firstElementChild.getAttribute('href') === location.pathname)
+				x.classList.add('active');
+			else
+				x.classList.remove('active');
+		});
 	}
 }
+
+export default Footer;

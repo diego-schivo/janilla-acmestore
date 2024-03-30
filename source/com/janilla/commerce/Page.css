@@ -1,0 +1,20 @@
+.page {
+	width: 100%;
+
+	> div {
+		margin: 0 auto;
+		max-width: 42rem;
+		padding: 5rem 0;
+	}
+	
+	h1 {
+		font-weight: 700;
+		margin: 0 0 2rem;
+	}
+	
+	.prose {
+		color: white;
+		line-height: 1.75rem;
+		margin: 0 0 2rem;
+	}
+}

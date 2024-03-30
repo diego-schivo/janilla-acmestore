@@ -1,6 +1,5 @@
 .search {
 	display: flex;
-	font-size: .875rem;
 	gap: 2rem;
 	margin: 0 auto;
 	max-width: 1536px;
@@ -23,6 +22,7 @@
 		p,
 		a {
 			color: white;
+			font-size: .875rem;
 			line-height: 1.25rem;
 		}
 		
@@ -35,6 +35,14 @@
 	.products {
 		min-height: 100vh;
 		width: 100%;
+		
+		> p {
+			margin: 0 0 1rem;
+			
+			span {
+				font-weight: 700;
+			}
+		}
 
 		ul {
 			display: grid;

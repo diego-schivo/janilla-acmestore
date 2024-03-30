@@ -58,11 +58,11 @@ public class HomeWeb {
 	}
 
 	@Render(template = "Home.html")
-	public record Page(Iterable<Object> children) implements com.janilla.commerce.Page {
+	public record Page(Iterable<Object> children) implements Layout.Page {
 
 		@Override
-		public String description() {
-			return "Ecommerce store built with Janilla.";
+		public SEO getSEO() {
+			return new SEO("Acme Store", "Ecommerce store built with Janilla.");
 		}
 	}
 }

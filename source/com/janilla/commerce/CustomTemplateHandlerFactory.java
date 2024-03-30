@@ -48,7 +48,7 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 	protected void render(Entry input, HttpExchange exchange) throws IOException {
 		var a = exchange.getRequest().getHeaders().get("Accept");
 		if (!a.equals("*/*")) {
-			var p = (Page) input.getValue();
+			var p = (Layout.Page) input.getValue();
 			var c = ((CommerceApp.Exchange) exchange).getCart(false);
 			CartModal m;
 			{

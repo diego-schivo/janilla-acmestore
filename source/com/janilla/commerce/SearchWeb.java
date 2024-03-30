@@ -28,10 +28,12 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 
 import com.janilla.frontend.RenderEngine;
 import com.janilla.frontend.Renderer;
+import com.janilla.html.Html;
 import com.janilla.net.Net;
 import com.janilla.persistence.Index;
 import com.janilla.persistence.Persistence;
@@ -73,7 +75,6 @@ public class SearchWeb {
 			ii = c2.filter("title", (Object[]) Index.KeywordSet.space.split(query.toLowerCase()));
 		} else
 			ii = c2.list();
-//			ii = c2.filter("hidden", false);
 		if (sort == null || sort.isEmpty())
 			sort = "latest-desc";
 		var pp = c2.read(ii).sorted(switch (sort) {
@@ -81,7 +82,11 @@ public class SearchWeb {
 		case "price-asc" -> Comparator.comparing(p -> p.getPrice());
 		case "price-desc" -> Comparator.<Product, BigDecimal>comparing(p -> p.getPrice()).reversed();
 		default -> throw new RuntimeException();
-		});
+		}).toList();
+
+		var m = (pp.isEmpty() ? "There are no products that match"
+				: "Showing " + pp.size() + " " + (pp.size() == 1 ? "result" : "results") + " for") + " <span>&quot;"
+				+ Html.escape(query) + "&quot;</span>";
 
 		var d = new Collection();
 		d.setTitle("All");
@@ -91,8 +96,8 @@ public class SearchWeb {
 		if (query != null && !query.isBlank())
 			l.add("q", query);
 
-		return new Page(() -> Stream.concat(Stream.of(d), cc).iterator(), c != null ? c.getId() : 0,
-				() -> pp.iterator(), Arrays.stream("""
+		return new Page(() -> Stream.concat(Stream.of(d), cc).iterator(), c != null ? c.getId() : 0, m, pp,
+				Arrays.stream("""
 						latest-desc	Latest arrivals
 						price-asc	Price: Low to high
 						price-desc	Price: High to low""".split("\n")).map(x -> {
@@ -105,12 +110,12 @@ public class SearchWeb {
 
 	@Render(template = "Search.html")
 	public record Page(Iterable<@Render(template = "Search-Collection.html") Collection> collections, long collection,
-			Iterable<@Render(template = "Search-Product.html") Product> products, Iterable<Sorting> sortings,
-			String sort) implements com.janilla.commerce.Page, Renderer {
+			String message, List<@Render(template = "Search-Product.html") Product> products,
+			Iterable<Sorting> sortings, String sort) implements Layout.Page, Renderer {
 
 		@Override
-		public String description() {
-			return "Search for products in the store.";
+		public SEO getSEO() {
+			return new SEO("Search", "Search for products in the store.");
 		}
 
 		@Override

@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import CartModal from './CartModal.js';
+import Footer from './Footer.js';
 import Home from './Home.js';
 import Navbar from './Navbar.js';
 import Product from './Product.js';
@@ -33,11 +34,15 @@ class Layout {
 
 	page;
 	
+	footer;
+
 	cartModal;
-	
+
 	constructor() {
 		this.navbar = new Navbar();
 		this.navbar.selector = () => document.body.firstElementChild;
+		this.footer = new Footer();
+		this.footer.selector = () => document.querySelector('main').lastElementChild;
 		this.cartModal = new CartModal();
 		this.cartModal.selector = () => document.body.lastElementChild;
 	}
@@ -47,16 +52,19 @@ class Layout {
 		document.querySelectorAll('a').forEach(x => x.addEventListener('click', this.handleLinkClick));
 		this.navbar.listen();
 		this.page?.listen();
-		this.cartModal?.listen();
+		this.footer.listen();
+		this.cartModal.listen();
 	}
-	
+
 	handleUrlRequest = async e => {
 		const u = e.detail.url;
 		history.pushState({}, '', u);
 		const f = document.querySelector('main');
+		const g = f.lastElementChild;
 		f.innerHTML = '';
 		const s = await fetch(u);
 		f.innerHTML = await s.text();
+		f.insertAdjacentElement('beforeend', g);
 
 		const p = u instanceof URL ? u.pathname : u.toString();
 		if (p === '/')
@@ -65,7 +73,11 @@ class Layout {
 			this.page = new Product();
 		else if (p === '/search' || p.startsWith('/search/'))
 			this.page = new Search();
-		this.page.selector = () => document.querySelector('main');
+		else
+			this.page = null;
+
+		if (this.page)
+			this.page.selector = () => f;
 
 		this.listen();
 	}

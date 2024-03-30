@@ -26,9 +26,11 @@ package com.janilla.commerce;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 import com.janilla.frontend.RenderEngine;
 import com.janilla.frontend.Renderer;
@@ -48,6 +50,8 @@ public class ProductWeb {
 		this.persistence = persistence;
 	}
 
+	private static Map<Long, long[]> productRecommendations = new ConcurrentHashMap<>();
+
 	@Handle(method = "GET", path = "/product/(.*)")
 	public Page getPage(String handle, @Parameter(name = "image") int image, HttpRequest request) throws IOException {
 		var i = persistence.getCrud(Product.class).find("handle", handle);
@@ -55,30 +59,40 @@ public class ProductWeb {
 		var jj = persistence.getCrud(ProductVariant.class).filter("product", i);
 		var vv = persistence.getCrud(ProductVariant.class).read(jj).toArray(ProductVariant[]::new);
 		var pp = Net.parseQueryString(request.getURI().getRawQuery());
-		return new Page(p, vv, image, pp);
+		var kk = productRecommendations.computeIfAbsent(i,
+				k -> ThreadLocalRandom.current().longs(10, 1, 19).distinct().filter(x -> x != i).toArray());
+		var qq = persistence.getCrud(Product.class).read(kk).toList();
+		return new Page(p, vv, image, pp, qq);
 	}
 
 	@Render(template = "Product.html")
-	public record Page(Product product, ProductVariant[] variants, int image, EntryList<String, String> parameters)
-			implements com.janilla.commerce.Page, Renderer {
+	public record Page(Product product, ProductVariant[] variants, int image, EntryList<String, String> parameters,
+			List<@Render(template = "Carousel-product.html") Product> relatedProducts)
+			implements Layout.Page, Renderer {
 
 		@Override
-		public String description() {
-			return product.getDescription();
+		public SEO getSEO() {
+			return new SEO(product.getTitle(), product.getDescription());
 		}
 
-		public Stream<@Render(delimiter = "<div></div>") Arrow> arrows() {
+		public Arrows arrows() {
+			var n = product.getImages().length;
+			if (n <= 1)
+				return null;
+
 			var q = parameters != null ? new EntryList<>(parameters) : new EntryList<String, String>();
-			return IntStream.of(-1, 1).mapToObj(i -> {
-				var l = product.getImages().length;
-				q.set("image", String.valueOf((image + i + l) % l));
-				return new Arrow(
-						Net.createURI(null, null, -1, "/product/" + product.getHandle(), Net.formatQueryString(q)),
-						i < 0 ? "Previous product image" : "Next product image");
-			});
+			q.set("image", String.valueOf(image > 0 ? image - 1 : n - 1));
+			var l = new Arrow(-1,
+					Net.createURI(null, null, -1, "/product/" + product.getHandle(), Net.formatQueryString(q)));
+			q.set("image", String.valueOf(image < n - 1 ? image + 1 : 0));
+			var r = new Arrow(1,
+					Net.createURI(null, null, -1, "/product/" + product.getHandle(), Net.formatQueryString(q)));
+			return new Arrows(l, r);
 		}
 
-		public AddToCart addToCart() {
+		public Object addToCart() {
+			if (!product.isAvailableForSale())
+				return new OutOfStock();
 			var e = Arrays.stream(product.getOptions()).allMatch(x -> !Objects
 					.toString(parameters != null ? parameters.get(x.name().toLowerCase()) : null, "").isEmpty());
 			var v = Arrays.stream(variants).filter(x -> x.getSelectedOptions().stream().allMatch(
@@ -89,7 +103,7 @@ public class ProductWeb {
 
 		@Override
 		public boolean evaluate(RenderEngine engine) {
-			record A(Arrow[] arrows, int index, Object icon) {
+			record A(Arrow arrow, Object icon) {
 			}
 			record B(URI[] images, int index) {
 			}
@@ -99,7 +113,7 @@ public class ProductWeb {
 			}
 			return engine.match(A.class, (x, y) -> {
 				y.setValue("");
-				y.setTemplate(new String[] { "Product-ArrowLeftIcon.html", "Product-ArrowRightIcon.html" }[x.index]);
+				y.setTemplate("Product-Arrow" + (x.arrow.step < 0 ? "Left" : "Right") + "Icon.html");
 			}) || engine.match(B.class, (x, y) -> {
 				var q = parameters != null ? new EntryList<>(parameters) : new EntryList<String, String>();
 				q.set("image", String.valueOf(x.index));
@@ -123,8 +137,16 @@ public class ProductWeb {
 		}
 	}
 
+	@Render(template = "Product-Arrows.html")
+	public record Arrows(Arrow left, Arrow right) {
+	}
+
 	@Render(template = "Product-Arrow.html")
-	public record Arrow(URI href, String ariaLabel) {
+	public record Arrow(int step, URI href) {
+
+		String ariaLabel() {
+			return (step < 0 ? "Previous" : "Next") + " product image";
+		}
 	}
 
 	@Render(template = "Product-Image.html")
@@ -161,5 +183,9 @@ public class ProductWeb {
 		public String ariaLabel() {
 			return enabled ? "Add to cart" : "Please select an option";
 		}
+	}
+
+	@Render(template = "Product-OutOfStock.html")
+	public record OutOfStock() {
 	}
 }

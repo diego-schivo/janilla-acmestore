@@ -3,11 +3,7 @@
 		<div class="gallery-div">
 			<div>
 				<img src="${product.featuredImage}" alt="${product.title}" />
-				<div class="arrows-div">
-					<div>
-						<!--${arrows}-->
-					</div>
-				</div>
+				<!--${arrows}-->
 			</div>
 			<ul>
 				<!--${product.images}-->
@@ -33,9 +29,20 @@
 	<div>
 		<h2>Related Products</h2>
 		<ul>
+			<!--${relatedProducts}-->
 		</ul>
 	</div>
 </div>
+
+<template id="Product-Arrows">
+	<div class="arrows-div">
+		<div>
+			<!--${left}-->
+			<div></div>
+			<!--${right}-->
+		</div>
+	</div>
+</template>
 
 <template id="Product-Arrow">
 	<a href="<!--${href}-->" aria-label="${ariaLabel}">
@@ -94,4 +101,10 @@
 	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 		<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
 	</svg>
+</template>
+
+<template id="Product-OutOfStock">
+	<form class="add-to-cart">
+		<button disabled aria-disabled="true">Out Of Stock</button>
+	</form>
 </template>

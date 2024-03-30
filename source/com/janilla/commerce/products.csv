@@ -1,0 +1,19 @@
+acme-slip-on-shoes	true	Acme Slip-On Shoes		Size:1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10,10.5,11,11.5,12,12.5,13	shoes-1,shoes-2,shoes-3,shoes-4	45	6	false
+acme-geometric-circles-t-shirt	true	Acme Circles T-Shirt	60% combed ringspun cotton/40% polyester jersey tee.	Color:Black,White,Blue;Size:XS,S,M,L,XL,XXL,XXXL	t-shirt-circles-black,t-shirt-circles-white,t-shirt-circles-blue	20	12,1	false
+acme-drawstring-bag	true	Acme Drawstring Bag		Color:Black,White;Size:6 x 8 inch,7 x 9 inch,8 x 11 inch,9 x 12 inch,10 x 15 inch,12 x 16 inch	bag-black,bag-white	12	3,1	false
+acme-mechanical-keyboard	false	Acme Keyboard			keyboard	150	5	false
+acme-rainbow-prism-t-shirt	true	Acme Prism T-Shirt	60% combed ringspun cotton/40% polyester jersey tee.	Size:XS,S,M,L,XL,XXL,XXXL	t-shirt-spiral-1,t-shirt-spiral-2,t-shirt-spiral-3,t-shirt-spiral-4	25	12	false
+acme-t-shirt	true	Acme T-Shirt	60% combed ringspun cotton/40% polyester jersey tee.	Color:Black,Blue,Gray,Pink,White;Size:XS,S,M,L,XL,XXL,XXXL	t-shirt-color-black,t-shirt-color-blue,t-shirt-color-gray,t-shirt-color-pink,t-shirt-color-white	20	12	false
+acme-sticker	true	Acme Sticker			sticker	4	13	false
+acme-rainbow-sticker	true	Acme Rainbow Sticker			sticker-rainbow	4	13	false
+acme-pacifier	true	Acme Pacifier			pacifier-1,pacifier-2	10	10	false
+acme-mug	true	Acme Mug	12 oz Beck Cork-Bottom Mug.		mug-1,mug-2	15	4,2	false
+acme-hoodie	true	Acme Hoodie	Fabric blend of Supima Cotton and Micromodal.	Size:XS,S,M,L,XL,XXL,XXXL	hoodie-1,hoodie-2	50	8,2	false
+acme-cap	true	Acme Cap	100% peach-washed cotton.		hat-1,hat-2,hat-3	20	7	false
+acme-dog-sweater	true	Acme Dog Sweater		Size:0 - 5 lbs,5 - 20 lbs,20 - 50 lbs,50 - 75 lbs,75+ lbs	dog-sweater-1,dog-sweater-2	20	11	false
+acme-cup	true	Acme Cup	12oz double wall ceramic body with a padded bottom.	Color:Black,White	cup-black,cup-white	15	4,1	false
+acme-cowboy-hat	true	Acme Cowboy Hat		Color:Black,Tan;Size:6 3/4,6 7/8,7,7 1/8,7 1/4,7 3/8,7 1/2,7 5/8,7 3/4	cowboy-hat-black-1,cowboy-hat-black-2,cowboy-hat-black-3,cowboy-hat-black-4,cowboy-hat-black-5,cowboy-hat-black-6,cowboy-hat-tan-1,cowboy-hat-tan-2,cowboy-hat-tan-3,cowboy-hat-tan-4,cowboy-hat-tan-5,cowboy-hat-tan-6	160	7	false
+acme-bomber-jacket	true	Acme Bomber Jacket	The multi-season must-have jacket: light and classic for daily wear, with a soft fleece lining for extra warmth.	Size:XS,S,M,L,XL,XXL,XXXL;Color:Army,Black	bomber-jacket-army,bomber-jacket-black	50	9	false
+acme-baby-onesie	true	Acme Baby Onesie	Short sleeve 5-oz, 100% combed ringspun cotton onesie	Size:NB,3M,6M,12M,18M,24M;Color:Black,White,Beige	baby-onesie-beige-1,baby-onesie-beige-2,baby-onesie-black-1,baby-onesie-black-2,baby-onesie-white-1,baby-onesie-white-2	10	10,2	false
+acme-baby-cap	true	Acme Baby Cap	100% combed ringspun cotton	Color:Black,Gray,White	baby-cap-black,baby-cap-gray,baby-cap-white	10	7,2	false
+acme-webcam-cover	true	Acme Webcam Cover			webcam-cover	5		true

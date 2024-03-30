@@ -44,7 +44,7 @@ footer {
 	}
 
 	nav {
-		li:first-child {
+		li.active {
 			a {
 				color: rgb(212, 212, 212);
 			}
