@@ -31,7 +31,6 @@ import java.util.stream.Collectors;
 
 import com.janilla.commerce.Navbar.MenuItem;
 import com.janilla.frontend.RenderEngine;
-import com.janilla.frontend.RenderEngine.Entry;
 import com.janilla.http.HttpExchange;
 import com.janilla.persistence.Persistence;
 import com.janilla.web.TemplateHandlerFactory;
@@ -45,7 +44,7 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 	}
 
 	@Override
-	protected void render(Entry input, HttpExchange exchange) throws IOException {
+	protected void render(RenderEngine.Entry input, HttpExchange exchange) throws IOException {
 		var a = exchange.getRequest().getHeaders().get("Accept");
 		if (!a.equals("*/*")) {
 			var p = (Layout.Page) input.getValue();
@@ -65,7 +64,7 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 					c != null ? c.getTotalQuantity() : 0);
 			var f = new Footer();
 			var l = new Layout(n, p, f, m);
-			input = new Entry(null, l, null);
+			input = RenderEngine.Entry.of(null, l, null);
 		}
 		super.render(input, exchange);
 	}
