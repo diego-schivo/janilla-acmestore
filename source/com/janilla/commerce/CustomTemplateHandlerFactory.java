@@ -70,7 +70,7 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 	}
 
 	@Override
-	protected RenderEngine newRenderEngine() {
+	protected RenderEngine newRenderEngine(HttpExchange exchange) {
 		return new CustomRenderEngine();
 	}
 }
