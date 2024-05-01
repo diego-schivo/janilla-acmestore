@@ -24,6 +24,7 @@
 package com.janilla.commerce;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URI;
@@ -40,15 +41,22 @@ import com.janilla.persistence.Persistence;
 class CustomPersistenceBuilder extends ApplicationPersistenceBuilder {
 
 	@Override
-	public Persistence build() throws IOException {
+	public Persistence build() {
 		var e = Files.exists(file);
 		var p = super.build();
+		p.setTypeResolver(x -> {
+			try {
+				return Class.forName("com.janilla.commerce." + x.replace('.', '$'));
+			} catch (ClassNotFoundException f) {
+				throw new RuntimeException(f);
+			}
+		});
 		if (!e)
 			populate(p);
 		return p;
 	}
 
-	void populate(Persistence persistence) throws IOException {
+	void populate(Persistence persistence) {
 		var r = ThreadLocalRandom.current();
 
 		try (var s = getClass().getResourceAsStream("collections.csv")) {
@@ -59,6 +67,8 @@ class CustomPersistenceBuilder extends ApplicationPersistenceBuilder {
 				z.setTitle(y[1]);
 				persistence.getCrud(Collection.class).create(z);
 			}
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
 		}
 
 		try (var s = getClass().getResourceAsStream("products.csv")) {
@@ -112,6 +122,8 @@ class CustomPersistenceBuilder extends ApplicationPersistenceBuilder {
 					} while (j >= 0);
 				}
 			}
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
 		}
 
 		try (var s = getClass().getResourceAsStream("pages.csv")) {
@@ -125,6 +137,8 @@ class CustomPersistenceBuilder extends ApplicationPersistenceBuilder {
 				}
 				persistence.getCrud(Page.class).create(z);
 			}
+		} catch (IOException e) {
+			throw new UncheckedIOException(e);
 		}
 	}
 }

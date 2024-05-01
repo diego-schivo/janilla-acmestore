@@ -67,6 +67,7 @@ public class CartWeb {
 		i = persistence.getCrud(CartItem.class).update(i.getId(), x -> {
 			x.setQuantity(x.getQuantity() + 1);
 			x.setTotalAmount(v.getPrice().multiply(BigDecimal.valueOf(x.getQuantity())));
+			return x;
 		});
 		if (z)
 			ii.add(i);
@@ -101,33 +102,12 @@ public class CartWeb {
 		var i = persistence.getCrud(CartItem.class).update(ii.get(j).getId(), x -> {
 			x.setQuantity(quantity);
 			x.setTotalAmount(v.getPrice().multiply(BigDecimal.valueOf(x.getQuantity())));
+			return x;
 		});
 		ii.set(j, i);
 		c = update(c, ii);
 		return new CartModal(c, ii);
 	}
-
-//	protected Cart getCart(HttpExchange exchange, boolean create) throws IOException {
-//		Cart c;
-//		{
-//			var hh = exchange.getRequest().getHeaders();
-//			var h = hh != null ? hh.get("Cookie") : null;
-//			var cc = h != null ? Http.parseCookieHeader(h) : null;
-//			var s = cc != null ? cc.get("cart") : null;
-//			var i = s != null ? Long.parseLong(s) : 0;
-//			c = i > 0 ? persistence.getCrud(Cart.class).read(i) : null;
-//		}
-//		if (c == null) {
-//			c = new Cart();
-//			c.setSubtotalAmount(BigDecimal.ZERO);
-//			c.setTotalTaxAmount(BigDecimal.ZERO);
-//			c.setTotalAmount(BigDecimal.ZERO);
-//			persistence.getCrud(Cart.class).create(c);
-//			exchange.getResponse().getHeaders().add("Set-Cookie",
-//					Http.formatSetCookieHeader("cart", String.valueOf(c.getId()), null, "/", "strict"));
-//		}
-//		return c;
-//	}
 
 	protected List<CartItem> getItems(Cart cart) throws IOException {
 		var ii = persistence.getCrud(CartItem.class).filter("cart", cart.getId());
@@ -140,6 +120,7 @@ public class CartWeb {
 			x.setSubtotalAmount(items.stream().map(CartItem::getTotalAmount).reduce(BigDecimal.ZERO, BigDecimal::add));
 			x.setTotalTaxAmount(BigDecimal.ZERO);
 			x.setTotalAmount(x.getSubtotalAmount().add(x.getTotalTaxAmount()));
+			return x;
 		});
 	}
 }

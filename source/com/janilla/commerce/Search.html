@@ -3,23 +3,23 @@
 		<nav>
 			<h3>Collections</h3>
 			<ul>
-				<!--${collections}-->
+				<{collections}>
 			</ul>
 		</nav>
 	</div>
 	<div class="products">
 		<p>
-			<!--${message}-->
+			<{message}>
 		</p>
 		<ul>
-			<!--${products}-->
+			<{products}>
 		</ul>
 	</div>
 	<div class="filter-list sortings">
 		<nav>
 			<h3>Sort by</h3>
 			<ul>
-				<!--${sortings}-->
+				<{sortings}>
 			</ul>
 		</nav>
 	</div>
@@ -27,26 +27,26 @@
 
 <template id="Search-Collection">
 	<li>
-		<a href="/search/${handle}">${title}</a>
+		<a href="/search/{handle}">{title}</a>
 	</li>
 </template>
 
 <template id="Search-Collection-active">
 	<li>
-		<p>${title}</p>
+		<p>{title}</p>
 	</li>
 </template>
 
 <template id="Search-Product">
 	<li>
-		<a href="/product/${handle}" class="product-tile">
+		<a href="/product/{handle}" class="product-tile">
 			<div class="picture-box hover-effect">
-				<img src="${featuredImage}" alt="${title}" />
+				<img src="{featuredImage}" alt="{title}" />
 				<div class="product-tile-info-div">
 					<div>
-						<h3>${title}</h3>
+						<h3>{title}</h3>
 						<p class="price">
-							$${price}
+							${price}
 							<span>USD</span>
 						</p>
 					</div>
@@ -58,12 +58,12 @@
 
 <template id="Search-Sorting">
 	<li>
-		<a href="<!--${uri}-->">${title}</a>
+		<a href="<{uri}>">{title}</a>
 	</li>
 </template>
 
 <template id="Search-Sorting-active">
 	<li>
-		<p>${title}</p>
+		<p>{title}</p>
 	</li>
 </template>

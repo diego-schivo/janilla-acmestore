@@ -2,34 +2,34 @@
 	<div class="picture-box">
 		<div class="gallery-div">
 			<div>
-				<img src="${product.featuredImage}" alt="${product.title}" />
-				<!--${arrows}-->
+				<img src="{product.featuredImage}" alt="{product.title}" />
+				<{arrows}>
 			</div>
 			<ul>
-				<!--${product.images}-->
+				<{product.images}>
 			</ul>
 		</div>
 		<div class="product-description-div">
 			<div>
-				<h1>${product.title}</h1>
+				<h1>{product.title}</h1>
 				<div class="price">
 					<p>
-						$${product.price}
+						${product.price}
 						<span>USD</span>
 					</p>
 				</div>
 			</div>
-			<!--${product.options}-->
+			<{product.options}>
 			<div class="prose">
-				<!--${product.descriptionHtml}-->
+				<{product.descriptionHtml}>
 			</div>
-			<!--${addToCart}-->
+			<{addToCart}>
 		</div>
 	</div>
 	<div>
 		<h2>Related Products</h2>
 		<ul>
-			<!--${relatedProducts}-->
+			<{relatedProducts}>
 		</ul>
 	</div>
 </div>
@@ -37,16 +37,16 @@
 <template id="Product-Arrows">
 	<div class="arrows-div">
 		<div>
-			<!--${left}-->
+			<{left}>
 			<div></div>
-			<!--${right}-->
+			<{right}>
 		</div>
 	</div>
 </template>
 
 <template id="Product-Arrow">
-	<a href="<!--${href}-->" aria-label="${ariaLabel}">
-		<!--${icon}-->
+	<a href="<{href}>" aria-label="{ariaLabel}">
+		<{icon}>
 	</a>
 </template>
 
@@ -63,10 +63,10 @@
 </template>
 
 <template id="Product-Image">
-	<li class="${activeClass}">
-		<a href="<!--${href}-->" class="product-tile" aria-label="Enlarge product image">
+	<li class="{activeClass}">
+		<a href="<{href}>" class="product-tile" aria-label="Enlarge product image">
 			<div class="picture-box hover-effect">
-				<img src="${src}" alt="" width="80" height="80">
+				<img src="{src}" alt="" width="80" height="80">
 			</div>
 		</a>
 	</li>
@@ -74,26 +74,26 @@
 
 <template id="Product-option">
 	<dl>
-		<dt>${name}</dt>
+		<dt>{name}</dt>
 		<dd>
-			<!--${values}-->
+			<{values}>
 		</dd>
 	</dl>
 </template>
 
 <template id="Product-OptionValue">
-	<button name="${name}" value="${value}" class="${activeClass}" title="${title}" data-${disabledAttribute} aria-disabled="${ariaDisabled}">${value}</button>
+	<button name="{name}" value="{value}" class="{activeClass}" title="{title}" data-{disabledAttribute} aria-disabled="{ariaDisabled}">{value}</button>
 </template>
 
 <template id="Product-AddToCart">
 	<form class="add-to-cart">
-		<button data-${disabledAttribute} aria-disabled="${ariaDisabled}" aria-label="${ariaLabel}">
+		<button data-{disabledAttribute} aria-disabled="{ariaDisabled}" aria-label="{ariaLabel}">
 			<div>
-				<!--${icon}-->
+				<{icon}>
 			</div>
 			Add To Cart
 		</button>
-		<input type="hidden" name="variant" value="${variant}" />
+		<input type="hidden" name="variant" value="{variant}" />
 	</form>
 </template>
 

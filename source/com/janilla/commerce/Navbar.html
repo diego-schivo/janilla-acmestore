@@ -5,27 +5,27 @@
 		<div class="links-div">
 			<a href="/">
 				<div class="icon-div logo">
-					<!--${logoIcon}-->
+					<{logoIcon}>
 				</div>
 				<div>Acme Store</div>
 			</a>
 			<ul>
-				<!--${menu}-->
+				<{menu}>
 			</ul>
 		</div>
 		<div class="search-div">
 			<form>
 				<input type="text" placeholder="Search for products..." autocomplete="off" name="search" value="" />
 				<div class="magnifying-glass-icon-div">
-					<!--${magnifyingGlassIcon}-->
+					<{magnifyingGlassIcon}>
 				</div>
 			</form>
 		</div>
 		<div class="cart-div">
 			<button aria-label="Open cart">
 				<div class="icon-div cart">
-					<!--${cartIcon}-->
-					<!--${cartQuantity}-->
+					<{cartIcon}>
+					<{cartQuantity}>
 				</div>
 			</button>
 		</div>
@@ -41,7 +41,7 @@
 
 <template id="Navbar-MenuItem">
 	<li>
-		<a href="${uri}">${title}</a>
+		<a href="{uri}">{title}</a>
 	</li>
 </template>
 
@@ -58,5 +58,5 @@
 </template>
 
 <template id="Navbar-cartQuantity">
-	<div data-quantity="${}"></div>
+	<div data-quantity="{}"></div>
 </template>

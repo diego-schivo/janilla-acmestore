@@ -1,6 +1,6 @@
 <div class="cart-modal" style="display: none">
 	<div class="cart-overlay" aria-hidden="true"></div>
-	<div class="cart-panel ${emptyClass}">
+	<div class="cart-panel {emptyClass}">
 		<div>
 			<p>My Cart</p>
 			<button class="close" aria-label="Close cart">
@@ -11,7 +11,7 @@
 				</div>
 			</button>
 		</div>
-		<!--${content}-->
+		<{content}>
 	</div>
 </div>
 
@@ -27,13 +27,13 @@
 <template id="CartModal-nonempty">
 	<div>
 		<ul class="cart-lines">
-			<!--${items}-->
+			<{items}>
 		</ul>
 		<div class="cart-cost">
 			<div>
 				<p>Taxes</p>
 				<p class="amount">
-					$${cart.totalTaxAmount}
+					${cart.totalTaxAmount}
 					<span>USD</span>
 				</p>
 			</div>
@@ -44,7 +44,7 @@
 			<div>
 				<p>Total</p>
 				<p class="amount">
-					$${cart.totalAmount}
+					${cart.totalAmount}
 					<span>USD</span>
 				</p>
 			</div>
@@ -58,7 +58,7 @@
 		<div class="cart-line-div">
 			<div class="delete-div">
 				<form>
-					<input type="hidden" name="variant" value="${variant}" />
+					<input type="hidden" name="variant" value="{variant}" />
 					<button type="submit" aria-label="Remove cart item" aria-disabled="false">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -69,24 +69,24 @@
 			</div>
 			<a href="#">
 				<div class="picture-box">
-					<img src="${image}" />
+					<img src="{image}" />
 				</div>
 				<div>
-					<span>${title1}</span>
-					<p>${title2}</p>
+					<span>{title1}</span>
+					<p>{title2}</p>
 				</div>
 			</a>
 			<div>
 				<p>
-					$${totalAmount}
+					${totalAmount}
 					<span>USD</span>
 				</p>
 				<div class="quantity-div">
-					<!--${decrease}-->
+					<{decrease}>
 					<p>
-						<span>${quantity}</span>
+						<span>{quantity}</span>
 					</p>
-					<!--${increase}-->
+					<{increase}>
 				</div>
 			</div>
 		</div>
@@ -95,10 +95,10 @@
 
 <template id="CartModal-editItemQuantity">
 	<form>
-		<input type="hidden" name="variant" value="${variant}" />
-		<input type="hidden" name="quantity" value="${quantity}" />
-		<button type="submit" aria-label="${ariaLabel}" aria-disabled="${ariaDisabled}">
-			<!--${icon}-->
+		<input type="hidden" name="variant" value="{variant}" />
+		<input type="hidden" name="quantity" value="{quantity}" />
+		<button type="submit" aria-label="{ariaLabel}" aria-disabled="{ariaDisabled}">
+			<{icon}>
 		</button>
 		<p aria-live="polite" role="status"></p>
 	</form>
