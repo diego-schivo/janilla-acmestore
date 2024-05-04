@@ -27,20 +27,20 @@ import java.net.URI;
 
 import com.janilla.web.Render;
 
-@Render(template = "Navbar.html")
-public record Navbar(Iterable<MenuItem> menu, @Render(template = "Navbar-cartQuantity.html") int cartQuantity)
+@Render("Navbar.html")
+public record Navbar(Iterable<MenuItem> menu, @Render("Navbar-cartQuantity.html") int cartQuantity)
 //		implements Renderer
 {
 
-	public @Render(template = "Navbar-logoIcon.html") Object logoIcon() {
+	public @Render("Navbar-logoIcon.html") Object logoIcon() {
 		return "";
 	}
 
-	public @Render(template = "Navbar-magnifyingGlassIcon.html") Object magnifyingGlassIcon() {
+	public @Render("Navbar-magnifyingGlassIcon.html") Object magnifyingGlassIcon() {
 		return "";
 	}
 
-	public @Render(template = "Navbar-cartIcon.html") Object cartIcon() {
+	public @Render("Navbar-cartIcon.html") Object cartIcon() {
 		return "";
 	}
 
@@ -54,7 +54,7 @@ public record Navbar(Iterable<MenuItem> menu, @Render(template = "Navbar-cartQua
 //		});
 //	}
 
-	@Render(template = "Navbar-MenuItem.html")
+	@Render("Navbar-MenuItem.html")
 	public record MenuItem(String title, URI uri) {
 	}
 }

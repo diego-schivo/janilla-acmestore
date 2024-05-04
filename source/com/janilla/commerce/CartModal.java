@@ -29,8 +29,8 @@ import com.janilla.frontend.RenderEngine;
 import com.janilla.frontend.Renderer;
 import com.janilla.web.Render;
 
-@Render(template = "CartModal.html")
-public record CartModal(Cart cart, List<@Render(template = "CartModal-item.html") CartItem> items) implements Renderer {
+@Render("CartModal.html")
+public record CartModal(Cart cart, List<@Render("CartModal-item.html") CartItem> items) implements Renderer {
 
 	public String emptyClass() {
 		return items == null || items.isEmpty() ? "empty" : "";

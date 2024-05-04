@@ -28,13 +28,18 @@ import java.io.UncheckedIOException;
 import java.nio.file.Path;
 import java.util.Properties;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import com.janilla.http.HttpExchange;
 import com.janilla.http.HttpRequest;
 import com.janilla.http.HttpServer;
 import com.janilla.io.IO;
+import com.janilla.persistence.ApplicationPersistenceBuilder;
 import com.janilla.persistence.Persistence;
+import com.janilla.reflect.Factory;
+import com.janilla.reflect.Reflection;
 import com.janilla.util.Lazy;
+import com.janilla.util.Util;
 import com.janilla.web.ApplicationHandlerBuilder;
 
 public class CommerceApp {
@@ -58,21 +63,36 @@ public class CommerceApp {
 
 	Properties configuration;
 
+	private Supplier<Factory> factory = Lazy.of(() -> {
+		var f = new Factory();
+		f.setTypes(Stream.concat(Util.getPackageClasses("com.janilla.store.backend"),
+				Util.getPackageClasses(getClass().getPackageName())).toList());
+		f.setEnclosing(this);
+		return f;
+	});
+
 	private IO.Supplier<Persistence> persistence = IO.Lazy.of(() -> {
-		var b = new CustomPersistenceBuilder();
+//		var b = new CustomPersistenceBuilder();
+		var f = getFactory();
+		var b = f.newInstance(ApplicationPersistenceBuilder.class);
 		{
 			var p = configuration.getProperty("commerce.database.file");
 			if (p.startsWith("~"))
 				p = System.getProperty("user.home") + p.substring(1);
 			b.setFile(Path.of(p));
 		}
-		b.setApplication(this);
+//		b.setApplication(this);
 		return b.build();
 	});
 
 	Supplier<IO.Consumer<HttpExchange>> handler = Lazy.of(() -> {
-		var b = new ApplicationHandlerBuilder();
-		b.setApplication(this);
+//		var b = new ApplicationHandlerBuilder();
+//		b.setApplication(this);
+		var f = getFactory();
+		var b = f.newInstance(ApplicationHandlerBuilder.class);
+		var p = Reflection.property(b.getClass(), "application");
+		if (p != null)
+			p.set(b, f.getEnclosing());
 		return b.build();
 	});
 
@@ -82,6 +102,10 @@ public class CommerceApp {
 
 	public void setConfiguration(Properties configuration) {
 		this.configuration = configuration;
+	}
+
+	public Factory getFactory() {
+		return factory.get();
 	}
 
 	public Persistence getPersistence() {

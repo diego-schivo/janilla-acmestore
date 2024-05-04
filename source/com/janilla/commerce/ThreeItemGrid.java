@@ -25,6 +25,6 @@ package com.janilla.commerce;
 
 import com.janilla.web.Render;
 
-@Render(template = "ThreeItemGrid.html")
-public record ThreeItemGrid(Iterable<@Render(template = "ThreeItemGrid-product.html") Product> products) {
+@Render("ThreeItemGrid.html")
+public record ThreeItemGrid(Iterable<@Render("ThreeItemGrid-product.html") Product> products) {
 }

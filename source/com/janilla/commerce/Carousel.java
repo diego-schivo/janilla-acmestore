@@ -27,8 +27,8 @@ import com.janilla.frontend.RenderEngine;
 import com.janilla.frontend.Renderer;
 import com.janilla.web.Render;
 
-@Render(template = "Carousel.html")
-public record Carousel(Iterable<@Render(template = "Carousel-product.html") Product> products) implements Renderer {
+@Render("Carousel.html")
+public record Carousel(Iterable<@Render("Carousel-product.html") Product> products) implements Renderer {
 
 	@Override
 	public boolean evaluate(RenderEngine engine) {

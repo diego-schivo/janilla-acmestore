@@ -25,6 +25,6 @@ package com.janilla.commerce;
 
 import com.janilla.web.Render;
 
-@Render(template = "Footer.html")
+@Render("Footer.html")
 public record Footer() {
 }

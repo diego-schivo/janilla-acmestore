@@ -50,7 +50,7 @@ public class PageWeb {
 
 	protected static Pattern NEWLINE_SPACE = Pattern.compile("\\s*\\n\\s*");
 
-	@Render(template = "Page.html")
+	@Render("Page.html")
 	public record Page(com.janilla.commerce.Page page) implements Layout.Page {
 
 		@Override

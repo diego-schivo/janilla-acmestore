@@ -108,9 +108,9 @@ public class SearchWeb {
 				}).toList(), sort);
 	}
 
-	@Render(template = "Search.html")
-	public record Page(Iterable<@Render(template = "Search-Collection.html") Collection> collections, long collection,
-			String message, List<@Render(template = "Search-Product.html") Product> products,
+	@Render("Search.html")
+	public record Page(Iterable<@Render("Search-Collection.html") Collection> collections, long collection,
+			String message, List<@Render("Search-Product.html") Product> products,
 			Iterable<Sorting> sortings, String sort) implements Layout.Page, Renderer {
 
 		@Override
@@ -143,7 +143,7 @@ public class SearchWeb {
 //		}
 	}
 
-	@Render(template = "Search-Sorting.html")
+	@Render("Search-Sorting.html")
 	public record Sorting(String handle, String title, URI uri) {
 	}
 }

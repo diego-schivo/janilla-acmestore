@@ -25,7 +25,7 @@ package com.janilla.commerce;
 
 import com.janilla.web.Render;
 
-@Render(template = "Layout.html")
+@Render("Layout.html")
 public record Layout(Navbar navbar, Page page, Footer footer, CartModal cartModal) {
 
 	public interface Page {

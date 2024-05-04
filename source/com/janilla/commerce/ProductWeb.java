@@ -65,9 +65,9 @@ public class ProductWeb {
 		return new Page(p, vv, image, pp, qq);
 	}
 
-	@Render(template = "Product.html")
+	@Render("Product.html")
 	public record Page(Product product, ProductVariant[] variants, int image, EntryList<String, String> parameters,
-			List<@Render(template = "Carousel-product.html") Product> relatedProducts)
+			List<@Render("Carousel-product.html") Product> relatedProducts)
 			implements Layout.Page, Renderer {
 
 		@Override
@@ -137,11 +137,11 @@ public class ProductWeb {
 		}
 	}
 
-	@Render(template = "Product-Arrows.html")
+	@Render("Product-Arrows.html")
 	public record Arrows(Arrow left, Arrow right) {
 	}
 
-	@Render(template = "Product-Arrow.html")
+	@Render("Product-Arrow.html")
 	public record Arrow(int step, URI href) {
 
 		String ariaLabel() {
@@ -149,11 +149,11 @@ public class ProductWeb {
 		}
 	}
 
-	@Render(template = "Product-Image.html")
+	@Render("Product-Image.html")
 	public record Image(URI src, URI href, String activeClass) {
 	}
 
-	@Render(template = "Product-OptionValue.html")
+	@Render("Product-OptionValue.html")
 	public record OptionValue(String name, String value, String title, String activeClass, boolean enabled) {
 
 		public String disabledAttribute() {
@@ -165,10 +165,10 @@ public class ProductWeb {
 		}
 	}
 
-	@Render(template = "Product-AddToCart.html")
+	@Render("Product-AddToCart.html")
 	public record AddToCart(boolean enabled, long variant) {
 
-		public @Render(template = "Product-PlusIcon.html") Object icon() {
+		public @Render("Product-PlusIcon.html") Object icon() {
 			return "";
 		}
 
@@ -185,7 +185,7 @@ public class ProductWeb {
 		}
 	}
 
-	@Render(template = "Product-OutOfStock.html")
+	@Render("Product-OutOfStock.html")
 	public record OutOfStock() {
 	}
 }

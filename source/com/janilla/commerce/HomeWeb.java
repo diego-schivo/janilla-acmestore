@@ -57,7 +57,7 @@ public class HomeWeb {
 		return new Page(List.of(c1, c2));
 	}
 
-	@Render(template = "Home.html")
+	@Render("Home.html")
 	public record Page(Iterable<Object> children) implements Layout.Page {
 
 		@Override
