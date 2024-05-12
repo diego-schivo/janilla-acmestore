@@ -23,7 +23,6 @@
  */
 package com.janilla.commerce;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.Format;
@@ -35,7 +34,7 @@ public class CustomRenderEngine extends RenderEngine {
 	protected static Format currencyFormat = new DecimalFormat("0.00");
 
 	@Override
-	public Object render(Entry input) throws IOException {
+	public Object render(Entry input) {
 		var o = super.render(input);
 		return o != null ? switch (o) {
 		case BigDecimal x -> currencyFormat.format(x);

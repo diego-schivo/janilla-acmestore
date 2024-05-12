@@ -53,7 +53,7 @@ public class ProductWeb {
 	private static Map<Long, long[]> productRecommendations = new ConcurrentHashMap<>();
 
 	@Handle(method = "GET", path = "/product/(.*)")
-	public Page getPage(String handle, @Parameter(name = "image") int image, HttpRequest request) throws IOException {
+	public Page getPage(String handle, @Parameter("image") int image, HttpRequest request) throws IOException {
 		var i = persistence.getCrud(Product.class).find("handle", handle);
 		var p = persistence.getCrud(Product.class).read(i);
 		var jj = persistence.getCrud(ProductVariant.class).filter("product", i);

@@ -51,12 +51,12 @@ public class SearchWeb {
 	}
 
 	@Handle(method = "GET", path = "/search")
-	public Page getPage(@Parameter(name = "q") String query, @Parameter(name = "sort") String sort) throws IOException {
+	public Page getPage(@Parameter("q") String query, @Parameter("sort") String sort) throws IOException {
 		return getPage(null, query, sort);
 	}
 
 	@Handle(method = "GET", path = "/search/(.*)")
-	public Page getPage(String collection, String query, @Parameter(name = "sort") String sort) throws IOException {
+	public Page getPage(String collection, String query, @Parameter("sort") String sort) throws IOException {
 		var c1 = persistence.getCrud(Collection.class);
 		var ii = c1.list();
 		var cc = c1.read(ii);
