@@ -37,9 +37,9 @@ import com.janilla.html.Html;
 import com.janilla.net.Net;
 import com.janilla.persistence.Index;
 import com.janilla.persistence.Persistence;
-import com.janilla.reflect.Parameter;
 import com.janilla.util.EntryList;
 import com.janilla.web.Handle;
+import com.janilla.web.Bind;
 import com.janilla.web.Render;
 
 public class SearchWeb {
@@ -51,12 +51,12 @@ public class SearchWeb {
 	}
 
 	@Handle(method = "GET", path = "/search")
-	public Page getPage(@Parameter("q") String query, @Parameter("sort") String sort) throws IOException {
+	public Page getPage(@Bind("q") String query, @Bind("sort") String sort) throws IOException {
 		return getPage(null, query, sort);
 	}
 
 	@Handle(method = "GET", path = "/search/(.*)")
-	public Page getPage(String collection, String query, @Parameter("sort") String sort) throws IOException {
+	public Page getPage(String collection, String query, @Bind("sort") String sort) throws IOException {
 		var c1 = persistence.getCrud(Collection.class);
 		var ii = c1.list();
 		var cc = c1.read(ii);

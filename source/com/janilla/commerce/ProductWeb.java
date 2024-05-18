@@ -37,9 +37,9 @@ import com.janilla.frontend.Renderer;
 import com.janilla.http.HttpRequest;
 import com.janilla.net.Net;
 import com.janilla.persistence.Persistence;
-import com.janilla.reflect.Parameter;
 import com.janilla.util.EntryList;
 import com.janilla.web.Handle;
+import com.janilla.web.Bind;
 import com.janilla.web.Render;
 
 public class ProductWeb {
@@ -53,7 +53,7 @@ public class ProductWeb {
 	private static Map<Long, long[]> productRecommendations = new ConcurrentHashMap<>();
 
 	@Handle(method = "GET", path = "/product/(.*)")
-	public Page getPage(String handle, @Parameter("image") int image, HttpRequest request) throws IOException {
+	public Page getPage(String handle, @Bind("image") int image, HttpRequest request) throws IOException {
 		var i = persistence.getCrud(Product.class).find("handle", handle);
 		var p = persistence.getCrud(Product.class).read(i);
 		var jj = persistence.getCrud(ProductVariant.class).filter("product", i);

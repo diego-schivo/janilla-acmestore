@@ -31,8 +31,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.janilla.persistence.Persistence;
-import com.janilla.reflect.Parameter;
 import com.janilla.web.Handle;
+import com.janilla.web.Bind;
 
 public class CartWeb {
 
@@ -43,7 +43,7 @@ public class CartWeb {
 	}
 
 	@Handle(method = "POST", path = "/cart/add")
-	public CartModal addItem(@Parameter("variant") long variant, CommerceApp.Exchange exchange)
+	public CartModal addItem(@Bind("variant") long variant, CommerceApp.Exchange exchange)
 			throws IOException {
 		var v = persistence.getCrud(ProductVariant.class).read(variant);
 		if (v == null)
@@ -76,7 +76,7 @@ public class CartWeb {
 	}
 
 	@Handle(method = "POST", path = "/cart/remove")
-	public CartModal removeItem(@Parameter("variant") long variant, CommerceApp.Exchange exchange)
+	public CartModal removeItem(@Bind("variant") long variant, CommerceApp.Exchange exchange)
 			throws IOException {
 		var v = persistence.getCrud(ProductVariant.class).read(variant);
 		if (v == null)
@@ -91,7 +91,7 @@ public class CartWeb {
 	}
 
 	@Handle(method = "POST", path = "/cart/set")
-	public CartModal setItem(@Parameter("variant") long variant, @Parameter("quantity") int quantity,
+	public CartModal setItem(@Bind("variant") long variant, @Bind("quantity") int quantity,
 			CommerceApp.Exchange exchange) throws IOException {
 		var v = persistence.getCrud(ProductVariant.class).read(variant);
 		if (v == null)
