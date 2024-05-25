@@ -83,7 +83,7 @@ public class CustomPersistence extends Persistence {
 					var v = w.split(":");
 					return new ProductOption(v[0], v[1].split(","));
 				}).toArray(ProductOption[]::new) : new ProductOption[0]);
-				z.setImages(Arrays.stream(y[5].split(",")).map(w -> URI.create("/images/" + w + ".webp"))
+				z.setImages(Arrays.stream(y[5].split(",")).map(w -> URI.create("/images/" + w))
 						.toArray(URI[]::new));
 				z.setFeaturedImage(z.getImages()[0]);
 				z.setPrice(new BigDecimal(y[6]));
