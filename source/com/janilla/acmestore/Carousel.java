@@ -21,11 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import com.janilla.frontend.RenderEngine;
+import com.janilla.frontend.RenderParticipant;
+import com.janilla.web.Render;
 
-	opens com.janilla.acmestore;
+@Render("Carousel.html")
+public record Carousel(Iterable<@Render("Carousel-product.html") Product> products) implements RenderParticipant {
 
-	requires transitive com.janilla;
+	@Override
+	public boolean render(RenderEngine engine) {
+		record A(Product[] products) {
+		}
+		return engine.match(A.class, (x, y) -> {
+			var l = x.products.length;
+			var pp = new Product[l * 3];
+			System.arraycopy(x.products, 0, pp, 0, l);
+			System.arraycopy(x.products, 0, pp, l, l);
+			System.arraycopy(x.products, 0, pp, 2 * l, l);
+			y.setValue(pp);
+		});
+	}
 }

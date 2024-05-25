@@ -21,11 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import java.net.URI;
 
-	opens com.janilla.acmestore;
+import com.janilla.web.Render;
 
-	requires transitive com.janilla;
+@Render("Navbar.html")
+public record Navbar(Iterable<MenuItem> menu, @Render("Navbar-cartQuantity.html") int cartQuantity)
+//		implements Renderer
+{
+
+	public @Render("Navbar-logoIcon.html") Object logoIcon() {
+		return "";
+	}
+
+	public @Render("Navbar-magnifyingGlassIcon.html") Object magnifyingGlassIcon() {
+		return "";
+	}
+
+	public @Render("Navbar-cartIcon.html") Object cartIcon() {
+		return "";
+	}
+
+//	@Override
+//	public boolean evaluate(RenderEngine engine) {
+//		record A(int cartQuantity) {
+//		}
+//		return engine.match(A.class, (x, y) -> {
+//			if (x.cartQuantity == 0)
+//				y.setValue(null);
+//		});
+//	}
+
+	@Render("Navbar-MenuItem.html")
+	public record MenuItem(String title, URI uri) {
+	}
 }

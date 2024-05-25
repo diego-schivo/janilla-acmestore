@@ -21,11 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+import Layout from './Layout.js';
 
-	exports com.janilla.acmestore;
+class AcmeStoreApp {
 
-	opens com.janilla.acmestore;
-
-	requires transitive com.janilla;
+	run = () => {
+		new Layout().listen();
+	}
 }
+
+export default AcmeStoreApp;

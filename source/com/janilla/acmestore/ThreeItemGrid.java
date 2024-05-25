@@ -21,11 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import com.janilla.web.Render;
 
-	opens com.janilla.acmestore;
-
-	requires transitive com.janilla;
+@Render("ThreeItemGrid.html")
+public record ThreeItemGrid(Iterable<@Render("ThreeItemGrid-product.html") Product> products) {
 }

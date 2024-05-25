@@ -21,11 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import com.janilla.http.HttpExchange;
+import com.janilla.http.HttpRequest;
+import com.janilla.http.HttpResponse;
+import com.janilla.http.HttpServer;
+import com.janilla.reflect.Factory;
 
-	opens com.janilla.acmestore;
+public class CustomServer extends HttpServer {
 
-	requires transitive com.janilla;
+	public Factory factory;
+
+	@Override
+	protected HttpExchange buildExchange(HttpRequest request, HttpResponse response) {
+		var e = factory.create(HttpExchange.class);
+		e.setRequest(request);
+		e.setResponse(response);
+		return e;
+	}
 }

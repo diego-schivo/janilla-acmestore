@@ -21,11 +21,64 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import java.math.BigDecimal;
 
-	opens com.janilla.acmestore;
+import com.janilla.persistence.Index;
+import com.janilla.persistence.Store;
 
-	requires transitive com.janilla;
+@Store
+@Index
+public class Cart {
+
+	private long id;
+
+	private int totalQuantity;
+
+	private BigDecimal subtotalAmount;
+
+	private BigDecimal totalTaxAmount;
+
+	private BigDecimal totalAmount;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public int getTotalQuantity() {
+		return totalQuantity;
+	}
+
+	public void setTotalQuantity(int totalQuantity) {
+		this.totalQuantity = totalQuantity;
+	}
+
+	public BigDecimal getSubtotalAmount() {
+		return subtotalAmount;
+	}
+
+	public void setSubtotalAmount(BigDecimal subtotalAmount) {
+		this.subtotalAmount = subtotalAmount;
+	}
+
+	public BigDecimal getTotalTaxAmount() {
+		return totalTaxAmount;
+	}
+
+	public void setTotalTaxAmount(BigDecimal totalTaxAmount) {
+		this.totalTaxAmount = totalTaxAmount;
+	}
+
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 }

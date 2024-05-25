@@ -21,11 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import java.util.Map;
+import java.util.Map.Entry;
 
-	opens com.janilla.acmestore;
+import com.janilla.persistence.Crud;
 
-	requires transitive com.janilla;
+public class ProductCrud extends Crud<Product> {
+
+	@Override
+	protected Map<String, Entry<Object, Object>> getIndexMap(Product entity, long id) {
+		var m = super.getIndexMap(entity, id);
+		if (entity.isHidden())
+			m.keySet().removeIf(k -> k == null || !k.equals("handle"));
+		return m;
+	}
 }

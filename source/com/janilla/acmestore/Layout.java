@@ -21,11 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import com.janilla.web.Render;
 
-	opens com.janilla.acmestore;
+@Render("Layout.html")
+public record Layout(Navbar navbar, Page page, Footer footer, CartModal cartModal) {
 
-	requires transitive com.janilla;
+	public interface Page {
+
+		SEO getSEO();
+	}
 }

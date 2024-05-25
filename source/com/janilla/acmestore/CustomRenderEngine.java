@@ -21,11 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.Format;
 
-	opens com.janilla.acmestore;
+import com.janilla.frontend.RenderEngine;
 
-	requires transitive com.janilla;
+public class CustomRenderEngine extends RenderEngine {
+
+	protected static Format currencyFormat = new DecimalFormat("0.00");
+
+	@Override
+	public Object render(Entry input) {
+		var o = super.render(input);
+		return o != null ? switch (o) {
+		case BigDecimal x -> currencyFormat.format(x);
+		default -> o;
+		} : null;
+	}
 }

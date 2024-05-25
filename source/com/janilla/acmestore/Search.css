@@ -1,0 +1,54 @@
+.search {
+	display: flex;
+	gap: 2rem;
+	margin: 0 auto;
+	max-width: 1536px;
+	padding: 0 1rem;
+	
+	.filter-list {
+		flex: none;
+		width: 125px;
+		
+		h3 {
+			color: rgb(163, 163, 163);
+			font-size: 0.75rem;
+			font-weight: 400;
+		}
+		
+		li {
+			margin-top: .5rem;
+		}
+		
+		p,
+		a {
+			color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));
+			font-size: .875rem;
+			line-height: 1.25rem;
+		}
+		
+		p {
+			text-decoration: underline;
+			text-underline-offset: 4px;
+		}
+	}
+	
+	.products {
+		min-height: 100vh;
+		width: 100%;
+		
+		> p {
+			margin: 0 0 1rem;
+			
+			span {
+				font-weight: 700;
+			}
+		}
+
+		ul {
+			display: grid;
+			gap: 1rem;
+			grid-auto-flow: row;
+			grid-template-columns: repeat(3,minmax(0,1fr));
+		}
+	}
+}

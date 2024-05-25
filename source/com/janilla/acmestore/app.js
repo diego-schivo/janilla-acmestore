@@ -21,11 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+import AcmeStoreApp from './AcmeStoreApp.js';
 
-	exports com.janilla.acmestore;
-
-	opens com.janilla.acmestore;
-
-	requires transitive com.janilla;
-}
+const l = () => new AcmeStoreApp().run();
+document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', l) : l();

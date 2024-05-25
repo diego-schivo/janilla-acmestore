@@ -21,11 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import com.janilla.web.Error;
+import com.janilla.web.Render;
 
-	opens com.janilla.acmestore;
+@Error(code = 403, text = "Forbidden")
+@Render("""
+		{message}
+		""")
+public class MethodBlockedException extends RuntimeException {
 
-	requires transitive com.janilla;
+	private static final long serialVersionUID = 3932794379779897748L;
+
+	public MethodBlockedException() {
+		super("The requested action is disabled on this public server: please set up and run the application locally");
+	}
 }

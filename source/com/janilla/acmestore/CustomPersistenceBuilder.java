@@ -21,11 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module com.janilla.acmestore {
+package com.janilla.acmestore;
 
-	exports com.janilla.acmestore;
+import java.nio.file.Files;
 
-	opens com.janilla.acmestore;
+import com.janilla.persistence.ApplicationPersistenceBuilder;
+import com.janilla.persistence.Persistence;
 
-	requires transitive com.janilla;
+public class CustomPersistenceBuilder extends ApplicationPersistenceBuilder {
+
+	@Override
+	public Persistence build() {
+		var e = Files.exists(file);
+		var p = (CustomPersistence) super.build();
+		p.setTypeResolver(x -> {
+			try {
+				return Class.forName("com.janilla.acmestore." + x.replace('.', '$'));
+			} catch (ClassNotFoundException f) {
+				throw new RuntimeException(f);
+			}
+		});
+		if (!e)
+			p.seed();
+		return p;
+	}
 }
