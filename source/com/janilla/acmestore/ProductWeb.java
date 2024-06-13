@@ -38,8 +38,8 @@ import com.janilla.http.HttpRequest;
 import com.janilla.net.Net;
 import com.janilla.persistence.Persistence;
 import com.janilla.util.EntryList;
-import com.janilla.web.Handle;
 import com.janilla.web.Bind;
+import com.janilla.web.Handle;
 import com.janilla.web.Render;
 
 public class ProductWeb {
@@ -58,7 +58,7 @@ public class ProductWeb {
 		var p = persistence.crud(Product.class).read(i);
 		var jj = persistence.crud(ProductVariant.class).filter("product", i);
 		var vv = persistence.crud(ProductVariant.class).read(jj).toArray(ProductVariant[]::new);
-		var pp = Net.parseQueryString(request.getURI().getRawQuery());
+		var pp = Net.parseQueryString(request.getUri().getRawQuery());
 		var kk = productRecommendations.computeIfAbsent(i,
 				k -> ThreadLocalRandom.current().longs(10, 1, 19).distinct().filter(x -> x != i).toArray());
 		var qq = persistence.crud(Product.class).read(kk).toList();
@@ -67,8 +67,7 @@ public class ProductWeb {
 
 	@Render("Product.html")
 	public record Page(Product product, ProductVariant[] variants, int image, EntryList<String, String> parameters,
-			List<@Render("Carousel-product.html") Product> relatedProducts)
-			implements Layout.Page, RenderParticipant {
+			List<@Render("Carousel-product.html") Product> relatedProducts) implements Layout.Page, RenderParticipant {
 
 		@Override
 		public SEO getSEO() {
