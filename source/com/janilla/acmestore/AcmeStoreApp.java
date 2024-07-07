@@ -25,12 +25,13 @@ package com.janilla.acmestore;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.net.InetSocketAddress;
 import java.nio.file.Path;
 import java.util.Properties;
 import java.util.function.Supplier;
 
-import com.janilla.http.HttpServer;
 import com.janilla.io.IO;
+import com.janilla.net.Server;
 import com.janilla.persistence.ApplicationPersistenceBuilder;
 import com.janilla.persistence.Persistence;
 import com.janilla.reflect.Factory;
@@ -51,10 +52,10 @@ public class AcmeStoreApp {
 		}
 		a.getPersistence();
 
-		var s = a.getFactory().create(HttpServer.class);
-		s.setPort(Integer.parseInt(a.configuration.getProperty("acmestore.server.port")));
+		var s = a.getFactory().create(Server.class);
+		s.setAddress(new InetSocketAddress(Integer.parseInt(a.configuration.getProperty("acmestore.server.port"))));
 		s.setHandler(a.getHandler());
-		s.run();
+		s.serve();
 	}
 
 	public Properties configuration;
@@ -77,7 +78,7 @@ public class AcmeStoreApp {
 		return b.build();
 	});
 
-	Supplier<HttpServer.Handler> handler = Lazy.of(() -> {
+	Supplier<Server.Handler> handler = Lazy.of(() -> {
 		var b = getFactory().create(ApplicationHandlerBuilder.class);
 		return b.build();
 	});
@@ -98,7 +99,7 @@ public class AcmeStoreApp {
 		}
 	}
 
-	public HttpServer.Handler getHandler() {
+	public Server.Handler getHandler() {
 		return handler.get();
 	}
 }

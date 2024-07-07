@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 import com.janilla.acmestore.Navbar.MenuItem;
 import com.janilla.frontend.RenderEngine;
 import com.janilla.http.HttpExchange;
-import com.janilla.http.HttpHeader;
+import com.janilla.media.HeaderField;
 import com.janilla.persistence.Persistence;
 import com.janilla.web.TemplateHandlerFactory;
 
@@ -46,7 +46,7 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 	@Override
 	protected void render(RenderEngine.Entry input, HttpExchange exchange) {
 		var a = exchange.getRequest().getHeaders().stream().filter(x -> x.name().equals("Accept"))
-				.map(HttpHeader::value).findFirst().orElse(null);
+				.map(HeaderField::value).findFirst().orElse(null);
 		if (!a.equals("*/*")) {
 			var p = (Layout.Page) input.getValue();
 			var c = ((CustomExchange) exchange).getCart(false);

@@ -29,7 +29,7 @@ import java.math.BigDecimal;
 
 import com.janilla.http.Http;
 import com.janilla.http.HttpExchange;
-import com.janilla.http.HttpHeader;
+import com.janilla.media.HeaderField;
 import com.janilla.io.IO;
 import com.janilla.persistence.Persistence;
 
@@ -44,7 +44,7 @@ public class CustomExchange extends HttpExchange {
 		{
 			var hh = getRequest().getHeaders();
 			var h = hh != null
-					? hh.stream().filter(x -> x.name().equals("Cookie")).map(HttpHeader::value).findFirst().orElse(null)
+					? hh.stream().filter(x -> x.name().equals("Cookie")).map(HeaderField::value).findFirst().orElse(null)
 					: null;
 			var cc = h != null ? Http.parseCookieHeader(h) : null;
 			var s = cc != null ? cc.get("cart") : null;
@@ -57,7 +57,7 @@ public class CustomExchange extends HttpExchange {
 			c.setTotalTaxAmount(BigDecimal.ZERO);
 			c.setTotalAmount(BigDecimal.ZERO);
 			persistence.crud(Cart.class).create(c);
-			getResponse().getHeaders().add(new HttpHeader("Set-Cookie",
+			getResponse().getHeaders().add(new HeaderField("Set-Cookie",
 					Http.formatSetCookieHeader("cart", String.valueOf(c.getId()), null, "/", "strict")));
 		}
 		return c;
