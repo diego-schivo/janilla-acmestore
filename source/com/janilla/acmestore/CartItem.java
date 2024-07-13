@@ -26,7 +26,7 @@ package com.janilla.acmestore;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 import com.janilla.persistence.Index;
 import com.janilla.persistence.Store;
@@ -51,7 +51,7 @@ public class CartItem {
 
 	private String handle;
 
-	private List<Entry<String, String>> selectedOptions;
+	private List<Map.Entry<String, String>> selectedOptions;
 
 	private long variant;
 
@@ -119,11 +119,11 @@ public class CartItem {
 		this.handle = handle;
 	}
 
-	public List<Entry<String, String>> getSelectedOptions() {
+	public List<Map.Entry<String, String>> getSelectedOptions() {
 		return selectedOptions;
 	}
 
-	public void setSelectedOptions(List<Entry<String, String>> selectedOptions) {
+	public void setSelectedOptions(List<Map.Entry<String, String>> selectedOptions) {
 		this.selectedOptions = selectedOptions;
 	}
 

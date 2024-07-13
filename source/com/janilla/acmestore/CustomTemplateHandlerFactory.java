@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.janilla.acmestore.Navbar.MenuItem;
+import com.janilla.acmestore.Navbar;
 import com.janilla.frontend.RenderEngine;
 import com.janilla.http.HttpExchange;
 import com.janilla.media.HeaderField;
@@ -45,7 +45,7 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 
 	@Override
 	protected void render(RenderEngine.Entry input, HttpExchange exchange) {
-		var a = exchange.getRequest().getHeaders().stream().filter(x -> x.name().equals("Accept"))
+		var a = exchange.getRequest().getHeaders().stream().filter(x -> x.name().equals("accept"))
 				.map(HeaderField::value).findFirst().orElse(null);
 		if (!a.equals("*/*")) {
 			var p = (Layout.Page) input.getValue();
@@ -59,9 +59,9 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 				m = new CartModal(c, ii);
 			}
 			var n = new Navbar(
-					List.of(new MenuItem("All", URI.create("/search")),
-							new MenuItem("Shirts", URI.create("/search/shirts")),
-							new MenuItem("Stickers", URI.create("/search/stickers"))),
+					List.of(new Navbar.MenuItem("All", URI.create("/search")),
+							new Navbar.MenuItem("Shirts", URI.create("/search/shirts")),
+							new Navbar.MenuItem("Stickers", URI.create("/search/stickers"))),
 					c != null ? c.getTotalQuantity() : 0);
 			var f = new Footer();
 			var l = new Layout(n, p, f, m);

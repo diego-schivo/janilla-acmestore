@@ -25,7 +25,7 @@ package com.janilla.acmestore;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 import com.janilla.persistence.Index;
 import com.janilla.persistence.Store;
@@ -42,7 +42,7 @@ public class ProductVariant {
 
 	private boolean availableForSale;
 
-	private List<Entry<String, String>> selectedOptions;
+	private List<Map.Entry<String, String>> selectedOptions;
 
 	private BigDecimal price;
 
@@ -78,11 +78,11 @@ public class ProductVariant {
 		this.availableForSale = availableForSale;
 	}
 
-	public List<Entry<String, String>> getSelectedOptions() {
+	public List<Map.Entry<String, String>> getSelectedOptions() {
 		return selectedOptions;
 	}
 
-	public void setSelectedOptions(List<Entry<String, String>> selectedOptions) {
+	public void setSelectedOptions(List<Map.Entry<String, String>> selectedOptions) {
 		this.selectedOptions = selectedOptions;
 	}
 

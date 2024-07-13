@@ -30,6 +30,7 @@ import java.nio.file.Path;
 import java.util.Properties;
 import java.util.function.Supplier;
 
+import com.janilla.http.HttpHandler;
 import com.janilla.io.IO;
 import com.janilla.net.Server;
 import com.janilla.persistence.ApplicationPersistenceBuilder;
@@ -54,7 +55,7 @@ public class AcmeStoreApp {
 
 		var s = a.getFactory().create(Server.class);
 		s.setAddress(new InetSocketAddress(Integer.parseInt(a.configuration.getProperty("acmestore.server.port"))));
-		s.setHandler(a.getHandler());
+//		// s.setHandler(a.getHandler());
 		s.serve();
 	}
 
@@ -78,7 +79,7 @@ public class AcmeStoreApp {
 		return b.build();
 	});
 
-	Supplier<Server.Handler> handler = Lazy.of(() -> {
+	Supplier<HttpHandler> handler = Lazy.of(() -> {
 		var b = getFactory().create(ApplicationHandlerBuilder.class);
 		return b.build();
 	});
@@ -99,7 +100,7 @@ public class AcmeStoreApp {
 		}
 	}
 
-	public Server.Handler getHandler() {
+	public HttpHandler getHandler() {
 		return handler.get();
 	}
 }

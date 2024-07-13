@@ -27,7 +27,6 @@ import java.math.BigDecimal;
 import java.net.URI;
 
 import com.janilla.persistence.Index;
-import com.janilla.persistence.Index.KeywordSet;
 import com.janilla.persistence.Store;
 
 @Store
@@ -41,7 +40,7 @@ public class Product {
 
 	private boolean availableForSale;
 
-	@Index(keyGetter = KeywordSet.class)
+	@Index(keyGetter = Index.KeywordSet.class)
 	private String title;
 
 	private String description;
