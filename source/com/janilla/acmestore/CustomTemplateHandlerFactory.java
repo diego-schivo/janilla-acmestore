@@ -30,8 +30,8 @@ import java.util.stream.Collectors;
 
 import com.janilla.acmestore.Navbar;
 import com.janilla.frontend.RenderEngine;
+import com.janilla.http.HeaderField;
 import com.janilla.http.HttpExchange;
-import com.janilla.media.HeaderField;
 import com.janilla.persistence.Persistence;
 import com.janilla.web.TemplateHandlerFactory;
 

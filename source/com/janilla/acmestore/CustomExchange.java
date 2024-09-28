@@ -27,10 +27,10 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.math.BigDecimal;
 
+import com.janilla.http.HeaderField;
 import com.janilla.http.Http;
 import com.janilla.http.HttpExchange;
 import com.janilla.io.IO;
-import com.janilla.media.HeaderField;
 import com.janilla.persistence.Persistence;
 
 public class CustomExchange extends HttpExchange {
