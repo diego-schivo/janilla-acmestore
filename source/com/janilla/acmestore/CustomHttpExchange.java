@@ -29,11 +29,12 @@ import java.math.BigDecimal;
 
 import com.janilla.http.HeaderField;
 import com.janilla.http.Http;
+import com.janilla.http.HttpCookie;
 import com.janilla.http.HttpExchange;
 import com.janilla.io.IO;
 import com.janilla.persistence.Persistence;
 
-public class CustomExchange extends HttpExchange {
+public class CustomHttpExchange extends HttpExchange {
 
 	public Persistence persistence;
 
@@ -43,9 +44,8 @@ public class CustomExchange extends HttpExchange {
 		Cart c;
 		{
 			var hh = getRequest().getHeaders();
-			var h = hh != null
-					? hh.stream().filter(x -> x.name().equals("Cookie")).map(HeaderField::value).findFirst().orElse(null)
-					: null;
+			var h = hh != null ? hh.stream().filter(x -> x.name().equals("Cookie")).map(HeaderField::value).findFirst()
+					.orElse(null) : null;
 			var cc = h != null ? Http.parseCookieHeader(h) : null;
 			var s = cc != null ? cc.get("cart") : null;
 			var i = s != null ? Long.parseLong(s) : 0;
@@ -57,8 +57,8 @@ public class CustomExchange extends HttpExchange {
 			c.setTotalTaxAmount(BigDecimal.ZERO);
 			c.setTotalAmount(BigDecimal.ZERO);
 			persistence.crud(Cart.class).create(c);
-			getResponse().getHeaders().add(new HeaderField("Set-Cookie",
-					Http.formatSetCookieHeader("cart", String.valueOf(c.getId()), null, "/", "strict")));
+			getResponse().getHeaders().add(new HeaderField("set-cookie",
+					HttpCookie.of("cart", String.valueOf(c.getId())).withPath("/").withSameSite("strict").format()));
 		}
 		return c;
 	});

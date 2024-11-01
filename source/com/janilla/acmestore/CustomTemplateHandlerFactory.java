@@ -49,7 +49,7 @@ public class CustomTemplateHandlerFactory extends TemplateHandlerFactory {
 				.map(HeaderField::value).findFirst().orElse(null);
 		if (!a.equals("*/*")) {
 			var p = (Layout.Page) input.getValue();
-			var c = ((CustomExchange) exchange).getCart(false);
+			var c = ((CustomHttpExchange) exchange).getCart(false);
 			CartModal m;
 			{
 				var jj = c != null ? persistence.crud(CartItem.class).filter("cart", c.getId()) : null;

@@ -43,7 +43,7 @@ public class CartWeb {
 	}
 
 	@Handle(method = "POST", path = "/cart/add")
-	public CartModal addItem(@Bind("variant") long variant, CustomExchange exchange)
+	public CartModal addItem(@Bind("variant") long variant, CustomHttpExchange exchange)
 			throws IOException {
 		var v = persistence.crud(ProductVariant.class).read(variant);
 		if (v == null)
@@ -76,7 +76,7 @@ public class CartWeb {
 	}
 
 	@Handle(method = "POST", path = "/cart/remove")
-	public CartModal removeItem(@Bind("variant") long variant, CustomExchange exchange)
+	public CartModal removeItem(@Bind("variant") long variant, CustomHttpExchange exchange)
 			throws IOException {
 		var v = persistence.crud(ProductVariant.class).read(variant);
 		if (v == null)
@@ -92,7 +92,7 @@ public class CartWeb {
 
 	@Handle(method = "POST", path = "/cart/set")
 	public CartModal setItem(@Bind("variant") long variant, @Bind("quantity") int quantity,
-			CustomExchange exchange) throws IOException {
+			CustomHttpExchange exchange) throws IOException {
 		var v = persistence.crud(ProductVariant.class).read(variant);
 		if (v == null)
 			throw new RuntimeException();

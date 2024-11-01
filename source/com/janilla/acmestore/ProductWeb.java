@@ -58,7 +58,8 @@ public class ProductWeb {
 		var p = persistence.crud(Product.class).read(i);
 		var jj = persistence.crud(ProductVariant.class).filter("product", i);
 		var vv = persistence.crud(ProductVariant.class).read(jj).toArray(ProductVariant[]::new);
-		var pp = Net.parseQueryString(request.getUri().getRawQuery());
+//		var pp = Net.parseQueryString(request.getUri().getRawQuery());
+		var pp = Net.parseQueryString(request.getQuery());
 		var kk = productRecommendations.computeIfAbsent(i,
 				k -> ThreadLocalRandom.current().longs(10, 1, 19).distinct().filter(x -> x != i).toArray());
 		var qq = persistence.crud(Product.class).read(kk).toList();

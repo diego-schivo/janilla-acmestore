@@ -28,7 +28,7 @@ import com.janilla.http.HttpProtocol;
 import com.janilla.http.HttpExchange;
 import com.janilla.reflect.Factory;
 
-public class CustomHttp2Protocol extends HttpProtocol {
+public class CustomHttpProtocol extends HttpProtocol {
 
 	public Factory factory;
 
